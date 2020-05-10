@@ -1,0 +1,43 @@
+- name: Install required packages.
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+
+- name: Add Docker’s official GPG key.
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add dockers apt repo.
+  template:
+    src: "templates/etc/apt/sources.list.d/docker.list.j2"
+    dest: "/etc/apt/sources.list.d/docker.list"
+  register: _apt_repo_result
+
+- name: Update apt-cache when sources.list change.
+  apt:
+    update_cache: yes
+  when: _apt_repo_result.changed
+
+- name: Install docker.
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+
+- name: Deploy docker service file
+  template:
+    src: "templates/etc/systemd/system/docker.service.j2"
+    dest: "/etc/systemd/system/docker.service"
+  notify:
+    - Docker restart
+
+- name: Enable docker service and ensure it is started.
+  service:
+    name: docker
+    state: started
+    enabled: yes
