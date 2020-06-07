@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tobias-richter/ansible-docker.svg?branch=master)](https://travis-ci.org/tobias-richter/ansible-docker)
 
-This roles installs docker-ce and docker-ce-cli from the official docker
+This role installs docker-ce and docker-ce-cli from the official docker
 repos.
 
 ## Requirements

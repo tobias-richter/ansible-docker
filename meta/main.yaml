@@ -13,3 +13,6 @@ galaxy_info:
   - name: Ubuntu
     versions:
       - Bionic
+
+  galaxy_tags:
+    - docker
