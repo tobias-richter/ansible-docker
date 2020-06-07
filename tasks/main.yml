@@ -6,6 +6,15 @@
       - curl
       - gnupg-agent
       - software-properties-common
+      # python requirements
+      - python-dev
+      - libffi-dev
+      - libssl-dev
+      - gcc
+      - libc-dev
+      - make
+      - gnupg2
+      - pass
 
 - name: Add Docker’s official GPG key.
   apt_key:
@@ -23,11 +32,16 @@
     update_cache: yes
   when: _apt_repo_result.changed
 
-- name: Install docker.
+- name: Install docker os packages.
   apt:
     name:
       - docker-ce
       - docker-ce-cli
+
+- name: Install docker-compose.
+  pip:
+    name:
+      - docker-compose
 
 - name: Deploy docker service file
   template:
@@ -35,6 +49,20 @@
     dest: "/etc/systemd/system/docker.service"
   notify:
     - Docker restart
+
+- name: Remove DOCKER_CONFIG env var from environment.
+  lineinfile:
+    path: /etc/environment
+    regexp: '^DOCKER_CONFIG='
+    state: absent
+
+- name: Create DOCKER_CONFIG profile script
+  copy:
+    dest: /etc/profile.d/docker.sh
+    content: |
+      # ANSIBLE MANAGED
+      export DOCKER_CONFIG="${HOME}/.docker/"
+    mode: +x
 
 - name: Enable docker service and ensure it is started.
   service:
