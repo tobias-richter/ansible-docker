@@ -64,6 +64,14 @@
       export DOCKER_CONFIG="${HOME}/.docker/"
     mode: +x
 
+- name: Deploy docker daemon.json.
+  template:
+    src: templates/etc/docker/daemon.json.j2
+    dest: /etc/docker/daemon.json
+  tags:
+    daemon.json
+  notify: Docker restart
+
 - name: Enable docker service and ensure it is started.
   service:
     name: docker
