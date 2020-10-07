@@ -25,6 +25,7 @@
   template:
     src: "templates/etc/apt/sources.list.d/docker.list.j2"
     dest: "/etc/apt/sources.list.d/docker.list"
+    mode: 0644
   register: _apt_repo_result
 
 - name: Update apt-cache when sources.list change. # noqa 503
@@ -47,6 +48,7 @@
   template:
     src: "templates/etc/systemd/system/docker.service.j2"
     dest: "/etc/systemd/system/docker.service"
+    mode: 0644
   notify:
     - Docker restart
 
@@ -68,6 +70,7 @@
   template:
     src: templates/etc/docker/daemon.json.j2
     dest: /etc/docker/daemon.json
+    mode: 0644
   tags:
     daemon.json
   notify: Docker restart
