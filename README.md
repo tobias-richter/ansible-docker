@@ -1,6 +1,6 @@
 # tobias_richter.docker
 
-[![Build Status](https://travis-ci.org/tobias-richter/ansible-docker.svg?branch=master)](https://travis-ci.org/tobias-richter/ansible-docker)
+[![Build Status](https://github.com/tobias-richter/ansible-docker/workflows/CI/badge.svg)](https://github.com/tobias-richter/ansible-docker/actions)
 
 This role installs docker-ce and docker-ce-cli from the official docker
 repos.
