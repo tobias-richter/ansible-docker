@@ -15,3 +15,12 @@ docker_daemon_registry_mirrors: []
 docker_daemon_json:
   "insecure-registries": "{{ docker_daemon_insecure_registries }}"
   "registry-mirrors": "{{ docker_daemon_registry_mirrors }}"
+
+# The distribution to install docker-ce from
+docker_ansible_distribution: "{{ ansible_distribution | lower }}"
+
+# The distribution release
+docker_ansible_distribution_release: "{{ ansible_distribution_release | lower }}"
+
+# The architecture for the docker repository
+docker_apt_architecture: "amd64"
