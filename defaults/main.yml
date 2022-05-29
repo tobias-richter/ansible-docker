@@ -5,12 +5,12 @@ docker_unit_after: []
 
 # List of insecure registries, see https://docs.docker.com/engine/reference/commandline/dockerd/#insecure-registries
 docker_daemon_insecure_registries: []
-  # e.g. - localhost:32000
+# e.g. - localhost:32000
 
 # List of registry mirrors, see https://docs.docker.com/registry/recipes/mirror/
 docker_daemon_registry_mirrors: []
-  # e.g.
-  # - http://proxy.repo.main.corp:9081
+# e.g.
+# - http://proxy.repo.main.corp:9081
 
 # This dict is rendered using to_nice_json to /etc/docker/daemon.json
 docker_daemon_json:
